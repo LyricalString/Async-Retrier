@@ -14,8 +14,8 @@ export const asyncRetry = async <T>(
 ): Promise<T> => {
   let retries = 0;
   const maxRetries = options.maxRetries || 3;
-  const factor = options.factor || 1;
-  const onError = options.onError || (() => { });
+  const delay = options.delay || 1000;
+  const onError = options.onError || (() => {});
   while (retries < maxRetries) {
     try {
       return await fn();
@@ -24,7 +24,6 @@ export const asyncRetry = async <T>(
       if (retries >= maxRetries) {
         throw e;
       }
-      const delay = Math.pow(factor, retries) * 100;
       onError(e, retries, delay);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }

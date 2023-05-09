@@ -8,9 +8,9 @@ export interface AsyncRetryOptions {
   maxRetries?: number;
 
   /**
-   * The backoff factor. Defaults to 1.
+   * The delay (in milliseconds) between retries. Defaults to 1000.
    */
-  factor?: number;
+  delay?: number;
 
   /**
    * A callback function that can be used to handle errors that occur during retries. The function is called with
