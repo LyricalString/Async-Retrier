@@ -1,8 +1,8 @@
 {
   "name": "async-retrier",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "Async retrier is a simple library that allows you to retry async functions with a delay between each retry.",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",
@@ -23,9 +23,9 @@
   "author": "LyricalString",
   "license": "MIT",
   "files": [
-    "dist/**/*"
+    "build/**/*"
   ],
-  "types": "dist/index.d.ts",
+  "types": "build/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/LyricalString/Async-Retrier.git"
