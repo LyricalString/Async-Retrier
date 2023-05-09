@@ -1,15 +1,35 @@
 {
   "name": "async-retrier",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Async retrier is a simple library that allows you to retry async functions with a delay between each retry.",
   "main": "index.js",
   "scripts": {
+    "test": "mocha dist/test/index.spec.js",
     "build": "tsc",
-    "test": "mocha dist/test/index.spec.js"
+    "build:watch": "tsc -w",
+    "start": "node build/index.js",
+    "start:watch": "nodemon build/index.js",
+    "prepare": "npm run build",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "async",
+    "async retrier",
+    "retrier",
+    "retry requests",
+    "retry async requests"
+  ],
+  "author": "LyricalString",
+  "license": "MIT",
+  "files": [
+    "dist/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LyricalString/Lovely-Logs.git"
+  },
+  "homepage": "https://github.com/LyricalString/Lovely-Logs",
   "devDependencies": {
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
