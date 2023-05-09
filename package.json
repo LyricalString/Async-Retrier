@@ -1,6 +1,6 @@
 {
   "name": "async-retrier",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Async retrier is a simple library that allows you to retry async functions with a delay between each retry.",
   "main": "index.js",
   "scripts": {
@@ -28,9 +28,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/LyricalString/Lovely-Logs.git"
+    "url": "https://github.com/LyricalString/Async-Retrier.git"
   },
-  "homepage": "https://github.com/LyricalString/Lovely-Logs",
+  "homepage": "https://github.com/LyricalString/Async-Retrier",
   "devDependencies": {
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
