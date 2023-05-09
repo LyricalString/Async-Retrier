@@ -1,11 +1,10 @@
-import { expect } from 'chai';
 import { asyncRetry } from '../src';
 
 describe('asyncRetry', () => {
   it('should return the result of the function on success', async () => {
     const fn = () => Promise.resolve('success');
     const result = await asyncRetry(fn);
-    expect(result).to.equal('success');
+    expect(result).toEqual('success');
   });
 
   it('should retry the function until it succeeds', async () => {
@@ -19,16 +18,11 @@ describe('asyncRetry', () => {
       }
     };
     const result = await asyncRetry(fn, { maxRetries: 3, delay: 10 });
-    expect(result).to.equal('success');
+    expect(result).toEqual('success');
   });
 
   it('should throw an error if the function fails after all retries', async () => {
     const fn = () => Promise.reject(new Error('failure'));
-    try {
-      await asyncRetry(fn, { maxRetries: 3, delay: 10 });
-      throw new Error('Expected function to throw an error');
-    } catch (e) {
-      expect(e.message).to.equal('failure');
-    }
+    await expect(asyncRetry(fn, { maxRetries: 3, delay: 10 })).rejects.toThrow('failure');
   });
 });
