@@ -18,14 +18,14 @@ describe('asyncRetry', () => {
         return Promise.resolve('success');
       }
     };
-    const result = await asyncRetry(fn, { maxRetries: 5 });
+    const result = await asyncRetry(fn, { maxRetries: 3, delay: 10 });
     expect(result).to.equal('success');
   });
 
   it('should throw an error if the function fails after all retries', async () => {
     const fn = () => Promise.reject(new Error('failure'));
     try {
-      await asyncRetry(fn, { maxRetries: 3 });
+      await asyncRetry(fn, { maxRetries: 3, delay: 10 });
       throw new Error('Expected function to throw an error');
     } catch (e) {
       expect(e.message).to.equal('failure');
