@@ -9,9 +9,8 @@ import { AsyncRetryOptions } from './types';
   @param {number} [options.delay=1000] - The delay in milliseconds between each retry attempt.
   @param {number} [options.timeout] - The timeout in milliseconds for each function call.
   @param {(error: Error, retries: number, delay: number) => void} [options.onRetry=() => {}] - The function to call on each retry attempt when an error occurs.
-  @param {(error: Error) => void} [options.onError=() => {}] - The function to call when the function times out or if the maximum number of retries is exceeded.
   @returns {Promise<T>} The result of the successful function call.
-  @throws {Error} If the function is not provided or if the maximum number of retries is exceeded.
+  @throws {Error} If the function is not provided, if there is an error or if the maximum number of retries is exceeded.
 */
 export const asyncRetry = async <T>(
   fn: () => Promise<T>,
@@ -25,7 +24,6 @@ export const asyncRetry = async <T>(
   const delay = options.delay || 1000;
   const timeout = options.timeout;
   const onRetry = options.onRetry || (() => { });
-  const onError = options.onError || (() => { });
   while (retries < maxRetries) {
     try {
       if (timeout) {
@@ -37,11 +35,11 @@ export const asyncRetry = async <T>(
     } catch (e) {
       retries++;
       if (retries >= maxRetries) {
-        onError(e);
+        throw e;
       }
       onRetry(e, retries, delay);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
-  throw new Error(`Unable to complete function after ${maxRetries} retries`);
+  throw new Error('Maximum retries exceeded');
 };

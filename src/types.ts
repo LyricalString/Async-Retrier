@@ -25,10 +25,4 @@ export interface AsyncRetryOptions {
   * next retry.
   */
   onRetry?: (error: any, retries: number, delay: number) => void;
-
-  /**
-   * A callback function that is called when the maximum retries is exceeded.
-   * The function is called with the error object.
-   */
-  onError?: (error: any) => void;
 }
