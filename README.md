@@ -26,7 +26,8 @@ import { asyncRetry } from "async-retrier"
 const options = {
   maxRetries: 5, // Number of retries, defaults to 3
   delay: 5000, // Delay in milliseconds, defaults to 1000
-  onError: (err, retries, delay) =>
+  timeout: 10000, // Timeout in milliseconds, defaults to 0. If set to a positive number, the operation will be cancelled if it takes longer than the timeout.
+  onRetry: (err, retries, delay) =>
     console.log(
       `Retry ${retries} failed with error: ${err}. Retrying in ${delay}ms.`
     ), // Function to call on error, default do nothing
@@ -34,7 +35,9 @@ const options = {
 
 const result = await asyncRetry(async () => {
   // your asynchronous operation here
-}, options)
+}, options).catch((err) => {
+  // handle error
+})
 
 console.log(result)
 ```
